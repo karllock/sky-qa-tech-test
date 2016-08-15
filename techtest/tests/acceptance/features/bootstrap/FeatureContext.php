@@ -25,6 +25,14 @@ class FeatureContext extends BehatContext {
         $this->calculator->pressNumber($argument1);
     }
 
+
+    /**
+     * @When /^I hit "add"$/
+     */
+    public function iHitAdd() {
+        $this->calculator->pressAdd();
+    }
+
     /**
      * @When /^I hit "multiply"$/
      */
