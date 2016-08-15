@@ -19,7 +19,7 @@ class FeatureContext extends BehatContext {
     }
 
     /**
-     * @Given /^I enter "(\d+)" into the calculator$/
+     * @Given /^I enter "([^"]*)" into the calculator$/
      */
     public function iEnterIntoTheCalculator($argument1) {
         $this->calculator->pressNumber($argument1);
@@ -55,14 +55,35 @@ class FeatureContext extends BehatContext {
     }
 
     /**
-     * @Given /^I hit "equals"$/
+    * @When /^I hit "factorial"$/
+    */
+    public function iHitFactorial() {
+        	$this->calculator->pressFactorial();
+        }
+
+    /**
+     * @When /^I hit "cubeRoot"$/
+     */
+    public function iHitCubeRoot() {
+        $this->calculator->pressCubeRoot();
+    }
+
+    /**
+    * @When /^I hit "decimalToHexadecimal"$/
+    */
+    public function iHitDectoHex() {
+        $this->calculator->pressDecToHex();
+    }
+
+    /**
+     * @When /^I hit "equals"$/
      */
     public function iHitEquals() {
         $this->calculator->pressEquals();
     }
 
     /**
-     * @Then /^I see a result of "(\d+)"$/
+     * @Then /^I see a result of "([^"]*)"$/
      */
     public function iSeeAResultOf($argument1) {
         $result = $this->calculator->readScreen();

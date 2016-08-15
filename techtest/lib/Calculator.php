@@ -22,6 +22,25 @@ class Calculator implements iCalculator {
         return ($a / $b);
     }
 
+    public function factorial($a) {
+            $factorial = $a--;
+            for ($i = $a; $i > 0; $i--) {
+                $factorial = $i * $factorial;
+            }
+            return $factorial;
+    }
+
+    public function cubeRoot($a) {
+          	$floatResult = pow($a ,1/3);
+          	$stringResult = number_format($floatResult,0,'.','');
+          	return $stringResult;
+    }
+
+    public function decimalToHexadecimal($a) {
+            $intValue = intval($a);
+            return dechex($intValue);
+    }
+
     public function pressNumber($number) {
         $this->stack[] = $number;
     }
@@ -54,6 +73,27 @@ class Calculator implements iCalculator {
         $this->op = "/";
     }
 
+    public function pressFactorial() {
+        if(count($this->stack) > 1) {
+                $this->evaluateStack();
+            }
+     	$this->op = "!";
+    }
+
+    public function pressCubeRoot() {
+        if(count($this->stack) > 1) {
+            $this->evaluateStack();
+        }
+     	$this->op = "^";
+    }
+
+    public function pressDecToHex() {
+        if(count($this->stack) > 1) {
+        	$this->evaluateStack();
+        }
+     	$this->op = "hexadecimal";
+    }
+
     public function pressEquals() {
         return $this->evaluateStack();
     }
@@ -71,6 +111,15 @@ class Calculator implements iCalculator {
                 break;
             case "/":
                 $result = $this->divide(array_shift($this->stack), array_shift($this->stack));
+                break;
+            case "!":
+                $result = $this->factorial(array_shift($this->stack), array_shift($this->stack));
+                break;
+            case "^":
+                $result = $this->cubeRoot(array_shift($this->stack), array_shift($this->stack));
+                break;
+            case "hexadecimal":
+                $result = $this->decimalToHexadecimal(array_shift($this->stack), array_shift($this->stack));
                 break;
         }
         $this->clearStack();
